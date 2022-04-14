@@ -5,7 +5,7 @@ class BasicLexer(Lexer):
     tokens = { NAME, NUMBER, STRING }
     ignore = "\t "
     literals = { '=', '+', '-', '/', 
-                '*', '(', ')', ',', ';'}
+                '*', '(', ')', ',', ';', '&'}
 
     NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
     STRING = r'\".*?\"'
@@ -65,11 +65,11 @@ class BasicParser(Parser):
     @_('expr "*" expr')
     def expr(self, p):
         return ('mul', p.expr0, p.expr1)
-  
+
     @_('expr "/" expr')
     def expr(self, p):
         return ('div', p.expr0, p.expr1)
-  
+
     @_('"-" expr %prec UMINUS')
     def expr(self, p):
         return p.expr
@@ -81,6 +81,10 @@ class BasicParser(Parser):
     @_('NUMBER')
     def expr(self, p):
         return ('num', p.NUMBER)
+
+    @_('expr "&" NAME')
+    def expr(self, p):
+        return ('iet', p.expr, p.NAME)
 
 
 class BasicExecute:
@@ -115,6 +119,10 @@ class BasicExecute:
   
         if node[0] == 'str':
             return node[1]
+
+        if node[0] == 'iet':
+            for i in range(int(node[1][1])):
+                print(self.env[node[2]])
   
         if node[0] == 'add':
             return self.walkTree(node[1]) + self.walkTree(node[2])
@@ -139,7 +147,7 @@ class BasicExecute:
 if __name__ == '__main__':
     lexer = BasicLexer()
     parser = BasicParser()
-    print('NerdFlanders Language')
+    print('Very drippy and cool')
     env = {}
       
     while True:
