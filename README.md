@@ -7,7 +7,7 @@ to run use "python NerdLang.py"
 
 USAGE:
 
-assign
+assign                  
 (varname)=(integer or string or mathmatical expression)
 
 for the maths stuff if you wannt to assign to a variable just put (varname)=(varname or integer)+/-*(varname or integer)
