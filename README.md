@@ -12,20 +12,20 @@ assign
 
 for the maths stuff if you wannt to assign to a variable just put (varname)=(varname or integer)+/-*(varname or integer)
 
-addition
+addition        
 (varname or integer)+(varname or integer)
 
-subtraction
+subtraction           
 (varname or integer)-(varname or integer)
 
-Multiplication
+Multiplication              
 (varname or integer)*(varname or integer)
 
-Division
+Division                        
 (varname or integer)/(varname or integer)
 
-To compare two variables to output a boolean value
+To compare two variables to output a boolean value                                            
 (varname)£(varname)
 
-ieteration (pretty useless at the moment it just prints out the variables value the chosen amount of times)
+ieteration (pretty useless at the moment it just prints out the variables value the chosen amount of times)                                   
 (integer (how many ieterations))&(varname to output)
