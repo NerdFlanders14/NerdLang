@@ -41,31 +41,38 @@ class BasicParser(Parser):
     @_('var_assign')
     def statement(self, p):
         return p.var_assign
-  
+    
+    #assign a mathmatical expression to a variable
     @_('NAME "=" expr')
     def var_assign(self, p):
         return ('var_assign', p.NAME, p.expr)
   
+    #assign a string to a variable
     @_('NAME "=" STRING')
     def var_assign(self, p):
         return ('var_assign', p.NAME, p.STRING)
-  
+    
+    #solve a problem i guess
     @_('expr')
     def statement(self, p):
         return (p.expr)
-  
+    
+    #add
     @_('expr "+" expr')
     def expr(self, p):
         return ('add', p.expr0, p.expr1)
-  
+    
+    #subtract
     @_('expr "-" expr')
     def expr(self, p):
         return ('sub', p.expr0, p.expr1)
-  
+    
+    #times
     @_('expr "*" expr')
     def expr(self, p):
         return ('mul', p.expr0, p.expr1)
 
+    #divide
     @_('expr "/" expr')
     def expr(self, p):
         return ('div', p.expr0, p.expr1)
@@ -73,15 +80,18 @@ class BasicParser(Parser):
     @_('"-" expr %prec UMINUS')
     def expr(self, p):
         return p.expr
-  
+    
+    #output a variable
     @_('NAME')
     def expr(self, p):
         return ('var', p.NAME)
-  
+    
+    #output a number
     @_('NUMBER')
     def expr(self, p):
         return ('num', p.NUMBER)
 
+    #ieteration
     @_('expr "&" NAME')
     def expr(self, p):
         return ('iet', p.expr, p.NAME)
